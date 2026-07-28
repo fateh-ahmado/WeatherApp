@@ -85,5 +85,34 @@ namespace WeatherApp.Controllers
 
             return View(stasjon);
         }
+        //Delete (GET)
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var stasjon = await _context.WeatherStations
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (stasjon == null)
+            {
+                return NotFound();
+            }
+
+            return View(stasjon);
+        }
+        //Delete (POST)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var stasjon = await _context.WeatherStations.FindAsync(id);
+
+            if (stasjon != null)
+            {
+                _context.WeatherStations.Remove(stasjon);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
