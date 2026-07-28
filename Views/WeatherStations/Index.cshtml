@@ -1,0 +1,24 @@
+@*Den forteller Razor: "denne siden forventer å motta en liste med WeatherStation-objekter*@
+@model List<WeatherApp.Models.WeatherStation>
+
+<h1>Lagrede steder</h1>   
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Navn</th>
+            <th>Breddegrad</th>
+            <th>Lengdegrad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stasjon in Model)
+        {
+            <tr>
+                <td>@stasjon.Name</td>
+                <td>@stasjon.Latitude</td>
+                <td>@stasjon.Longitude</td>
+            </tr>
+        }
+    </tbody>
+</table>
