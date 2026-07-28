@@ -1,0 +1,30 @@
+@model WeatherApp.Models.WeatherStation
+
+<h1>Rediger sted</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div>
+        <label asp-for="Name">Stedsnavn</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="Latitude">Breddegrad</label>
+        <input asp-for="Latitude" />
+        <span asp-validation-for="Latitude"></span>
+    </div>
+
+    <div>
+        <label asp-for="Longitude">Lengdegrad</label>
+        <input asp-for="Longitude" />
+        <span asp-validation-for="Longitude"></span>
+    </div>
+
+    <button type="submit">Lagre endringer</button>
+</form>
+
+<a asp-action="Index">Tilbake til listen</a>

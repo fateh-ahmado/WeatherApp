@@ -52,5 +52,38 @@ namespace WeatherApp.Controllers
 
             return View(stasjon);
         }
+        // U (Update/Edit)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var stasjon = await _context.WeatherStations.FindAsync(id);
+
+            if (stasjon == null)
+            {
+                return NotFound();
+            }
+
+            return View(stasjon);
+        }
+
+        //Edit (POST)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, WeatherStation stasjon)
+        {
+            if (id != stasjon.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _context.WeatherStations.Update(stasjon);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(stasjon);
+        }
     }
 }
