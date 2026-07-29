@@ -1,0 +1,36 @@
+@model WeatherApp.Models.WeatherObservation
+
+<h1>Rediger måling</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <div>
+        <label asp-for="WeatherStationId">Sted</label>
+        <select asp-for="WeatherStationId" asp-items="ViewBag.WeatherStations">
+        </select>
+        <span asp-validation-for="WeatherStationId"></span>
+    </div>
+
+    <div>
+        <label asp-for="Timestamp">Tidspunkt</label>
+        <input asp-for="Timestamp" />
+        <span asp-validation-for="Timestamp"></span>
+    </div>
+
+    <div>
+        <label asp-for="Temperature">Temperatur</label>
+        <input asp-for="Temperature" />
+        <span asp-validation-for="Temperature"></span>
+    </div>
+
+    <div>
+        <label asp-for="WindGust">Vindkast</label>
+        <input asp-for="WindGust" />
+    </div>
+
+    <button type="submit">Lagre endringer</button>
+</form>
+
+<a asp-action="Index">Tilbake til listen</a>

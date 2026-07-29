@@ -1,0 +1,26 @@
+@model WeatherApp.Models.WeatherObservation
+
+<h1>Slett måling</h1>
+
+<p>Er du sikker på at du vil slette denne målingen?</p>
+
+<dl>
+    <dt>Sted</dt>
+    <dd>@Model.WeatherStation?.Name</dd>
+
+    <dt>Tidspunkt</dt>
+    <dd>@Model.Timestamp</dd>
+
+    <dt>Temperatur</dt>
+    <dd>@Model.Temperature</dd>
+
+    <dt>Vindkast</dt>
+    <dd>@Model.WindGust</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Ja, slett</button>
+</form>
+
+<a asp-action="Index">Avbryt, tilbake til listen</a>

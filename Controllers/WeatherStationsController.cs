@@ -23,11 +23,12 @@ namespace WeatherApp.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var stasjon = await _context.WeatherStations
-                .FirstOrDefaultAsync(s => s.Id == id); // FirstOrDefaultAsync henter den første stasjonen som matcher id-en, eller null hvis ingen finnes.
+                .Include(s => s.Observations)
+                .FirstOrDefaultAsync(s => s.Id == id);
 
             if (stasjon == null)
             {
-                return NotFound(); // Dersom stasjonen ikke finnes, returner en 404-feil.
+                return NotFound();
             }
 
             return View(stasjon);
