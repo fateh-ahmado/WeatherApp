@@ -1,0 +1,45 @@
+@model WeatherApp.Models.WeatherStation
+
+<h1>Detaljer om @Model.Name</h1>
+
+<dl>
+    <dt>Navn</dt>
+    <dd>@Model.Name</dd>
+
+    <dt>Breddegrad</dt>
+    <dd>@Model.Latitude</dd>
+
+    <dt>Lengdegrad</dt>
+    <dd>@Model.Longitude</dd>
+</dl>
+
+<h2>Værmålinger for dette stedet</h2>
+
+@if (Model.Observations.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tidspunkt</th>
+                <th>Temperatur</th>
+                <th>Vindkast</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (WeatherObservation obs in Model.Observations)
+            {
+                <tr>
+                    <td>@obs.Timestamp</td>
+                    <td>@obs.Temperature</td>
+                    <td>@obs.WindGust</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Ingen værmålinger registrert ennå for dette stedet.</p>
+}
+
+<a asp-action="Index">Tilbake til listen</a>

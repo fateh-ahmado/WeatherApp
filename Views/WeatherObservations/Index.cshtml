@@ -1,0 +1,34 @@
+@model List<WeatherApp.Models.WeatherObservation>
+
+<h1>Værmålinger</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sted</th>
+            <th>Tidspunkt</th>
+            <th>Temperatur</th>
+            <th>Vindkast</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var maling in Model)
+        {
+            <tr>
+                <td>@maling.WeatherStation?.Name</td>
+                <td>@maling.Timestamp</td>
+                <td>@maling.Temperature</td>
+                <td>@maling.WindGust</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@maling.Id">Rediger</a> |
+                    <a asp-action="Delete" asp-route-id="@maling.Id">Slett</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create">Legg til ny måling</a>
+
+<p><a asp-controller="WeatherStations" asp-action="Index">Tilbake til værstasjoner</a></p>
