@@ -9,6 +9,7 @@
             <th>Tidspunkt</th>
             <th>Temperatur</th>
             <th>Vindkast</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,10 @@
                 <td>@maling.Timestamp</td>
                 <td>@maling.Temperature</td>
                 <td>@maling.WindGust</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@maling.Id">Rediger</a> |
+                    <a asp-action="Delete" asp-route-id="@maling.Id">Slett</a>
+                </td>
             </tr>
         }
     </tbody>
