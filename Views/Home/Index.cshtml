@@ -1,8 +1,34 @@
-﻿@{
+@model List<WeatherApp.Models.WeatherStation>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <div class="card" style="max-width: 500px;">
+        <div class="card-header">
+            Mine steder
+        </div>
+        @if (Model.Count == 0)
+        {
+            <div class="card-body">
+                <p class="card-text">Ingen steder er lagt til ennå.</p>
+                <a asp-controller="WeatherStations" asp-action="Create" class="btn btn-primary">Legg til nytt sted</a>
+            </div>
+        }
+        else
+        {
+            <ul class="list-group list-group-flush">
+                @foreach (var stasjon in Model)
+                {
+                    <li class="list-group-item">
+                        <a asp-controller="WeatherStations" asp-action="Details" asp-route-id="@stasjon.Id">@stasjon.Name</a>
+                    </li>
+                }
+            </ul>
+            <div class="card-body">
+                <a asp-controller="WeatherStations" asp-action="Index" class="btn btn-secondary">Se alle steder</a>
+            </div>
+        }
+    </div>
 </div>

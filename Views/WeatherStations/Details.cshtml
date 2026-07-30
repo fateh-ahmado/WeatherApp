@@ -1,45 +1,51 @@
 @model WeatherApp.Models.WeatherStation
 
-<h1>Detaljer om @Model.Name</h1>
+<div class="container mt-4">
+    <h1>Detaljer om @Model.Name</h1>
 
-<dl>
-    <dt>Navn</dt>
-    <dd>@Model.Name</dd>
+    <div class="card mb-4" style="max-width: 400px;">
+        <div class="card-body">
+            <dl class="row mb-0">
+                <dt class="col-sm-4">Navn</dt>
+                <dd class="col-sm-8">@Model.Name</dd>
 
-    <dt>Breddegrad</dt>
-    <dd>@Model.Latitude</dd>
+                <dt class="col-sm-4">Breddegrad</dt>
+                <dd class="col-sm-8">@Model.Latitude</dd>
 
-    <dt>Lengdegrad</dt>
-    <dd>@Model.Longitude</dd>
-</dl>
+                <dt class="col-sm-4">Lengdegrad</dt>
+                <dd class="col-sm-8">@Model.Longitude</dd>
+            </dl>
+        </div>
+    </div>
 
-<h2>Værmålinger for dette stedet</h2>
+    <h2>Værmålinger for dette stedet</h2>
 
-@if (Model.Observations.Any())
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Tidspunkt</th>
-                <th>Temperatur</th>
-                <th>Vindkast</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (WeatherObservation obs in Model.Observations)
-            {
+    @if (Model.Observations.Any())
+    {
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td>@obs.Timestamp</td>
-                    <td>@obs.Temperature</td>
-                    <td>@obs.WindGust</td>
+                    <th>Tidspunkt</th>
+                    <th>Temperatur</th>
+                    <th>Vindkast</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>Ingen værmålinger registrert ennå for dette stedet.</p>
-}
+            </thead>
+            <tbody>
+                @foreach (var obs in Model.Observations)
+                {
+                    <tr>
+                        <td>@obs.Timestamp</td>
+                        <td>@obs.Temperature</td>
+                        <td>@obs.WindGust</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="text-muted">Ingen værmålinger registrert ennå for dette stedet.</p>
+    }
 
-<a asp-action="Index">Tilbake til listen</a>
+    <a asp-action="Index" class="btn btn-secondary">Tilbake til listen</a>
+</div>

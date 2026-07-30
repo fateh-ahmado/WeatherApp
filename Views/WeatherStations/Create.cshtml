@@ -1,29 +1,30 @@
 @model WeatherApp.Models.WeatherStation
 
-<h1>Legg til nytt sted</h1>
+<div class="container mt-4">
+    <h1>Legg til nytt sted</h1>
 
-<form asp-action="Create" method="post">
-    <div asp-validation-summary="ModelOnly"></div>
+    <form asp-action="Create" method="post" style="max-width: 500px;">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div>
-        <label asp-for="Name">Stedsnavn</label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name"></span>
-    </div>
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Stedsnavn</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label asp-for="Latitude">Breddegrad</label>
-        <input asp-for="Latitude" />
-        <span asp-validation-for="Latitude"></span>
-    </div>
+        <div class="mb-3">
+            <label asp-for="Latitude" class="form-label">Breddegrad</label>
+            <input asp-for="Latitude" class="form-control" />
+            <span asp-validation-for="Latitude" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label asp-for="Longitude">Lengdegrad</label>
-        <input asp-for="Longitude" />
-        <span asp-validation-for="Longitude"></span>
-    </div>
+        <div class="mb-3">
+            <label asp-for="Longitude" class="form-label">Lengdegrad</label>
+            <input asp-for="Longitude" class="form-control" />
+            <span asp-validation-for="Longitude" class="text-danger"></span>
+        </div>
 
-    <button type="submit">Lagre</button>
-</form>
-
-<a asp-action="Index">Tilbake til listen</a>
+        <button type="submit" class="btn btn-primary">Lagre</button>
+        <a asp-action="Index" class="btn btn-secondary">Avbryt</a>
+    </form>
+</div>

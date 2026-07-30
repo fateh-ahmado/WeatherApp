@@ -1,26 +1,29 @@
 @model WeatherApp.Models.WeatherObservation
 
-<h1>Slett måling</h1>
+<div class="container mt-4">
+    <h1>Slett måling</h1>
 
-<p>Er du sikker på at du vil slette denne målingen?</p>
+    <div class="alert alert-warning" style="max-width: 500px;">
+        Er du sikker på at du vil slette denne målingen?
+    </div>
 
-<dl>
-    <dt>Sted</dt>
-    <dd>@Model.WeatherStation?.Name</dd>
+    <dl class="row" style="max-width: 500px;">
+        <dt class="col-sm-4">Sted</dt>
+        <dd class="col-sm-8">@Model.WeatherStation?.Name</dd>
 
-    <dt>Tidspunkt</dt>
-    <dd>@Model.Timestamp</dd>
+        <dt class="col-sm-4">Tidspunkt</dt>
+        <dd class="col-sm-8">@Model.Timestamp</dd>
 
-    <dt>Temperatur</dt>
-    <dd>@Model.Temperature</dd>
+        <dt class="col-sm-4">Temperatur</dt>
+        <dd class="col-sm-8">@Model.Temperature</dd>
 
-    <dt>Vindkast</dt>
-    <dd>@Model.WindGust</dd>
-</dl>
+        <dt class="col-sm-4">Vindkast</dt>
+        <dd class="col-sm-8">@Model.WindGust</dd>
+    </dl>
 
-<form asp-action="Delete" method="post">
-    <input type="hidden" asp-for="Id" />
-    <button type="submit">Ja, slett</button>
-</form>
-
-<a asp-action="Index">Avbryt, tilbake til listen</a>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Ja, slett</button>
+        <a asp-action="Index" class="btn btn-secondary">Avbryt</a>
+    </form>
+</div>

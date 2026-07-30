@@ -1,36 +1,37 @@
 @model WeatherApp.Models.WeatherObservation
 
-<h1>Legg til ny måling</h1>
+<div class="container mt-4">
+    <h1>Legg til ny måling</h1>
 
-<form asp-action="Create" method="post">
-    <div asp-validation-summary="ModelOnly"></div>
+    <form asp-action="Create" method="post" style="max-width: 500px;">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div>
-        <label asp-for="WeatherStationId">Sted</label>
-        <select asp-for="WeatherStationId" asp-items="ViewBag.WeatherStations">
-            <option value="">-- Velg et sted --</option>
-        </select>
-        <span asp-validation-for="WeatherStationId"></span>
-    </div>
+        <div class="mb-3">
+            <label asp-for="WeatherStationId" class="form-label">Sted</label>
+            <select asp-for="WeatherStationId" class="form-control" asp-items="ViewBag.WeatherStations">
+                <option value="">-- Velg et sted --</option>
+            </select>
+            <span asp-validation-for="WeatherStationId" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label asp-for="Timestamp">Tidspunkt</label>
-        <input asp-for="Timestamp" />
-        <span asp-validation-for="Timestamp"></span>
-    </div>
+        <div class="mb-3">
+            <label asp-for="Timestamp" class="form-label">Tidspunkt</label>
+            <input asp-for="Timestamp" class="form-control" />
+            <span asp-validation-for="Timestamp" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label asp-for="Temperature">Temperatur</label>
-        <input asp-for="Temperature" />
-        <span asp-validation-for="Temperature"></span>
-    </div>
+        <div class="mb-3">
+            <label asp-for="Temperature" class="form-label">Temperatur</label>
+            <input asp-for="Temperature" class="form-control" />
+            <span asp-validation-for="Temperature" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label asp-for="WindGust">Vindkast</label>
-        <input asp-for="WindGust" />
-    </div>
+        <div class="mb-3">
+            <label asp-for="WindGust" class="form-label">Vindkast</label>
+            <input asp-for="WindGust" class="form-control" />
+        </div>
 
-    <button type="submit">Lagre</button>
-</form>
-
-<a asp-action="Index">Tilbake til listen</a>
+        <button type="submit" class="btn btn-primary">Lagre</button>
+        <a asp-action="Index" class="btn btn-secondary">Avbryt</a>
+    </form>
+</div>
