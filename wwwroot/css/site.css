@@ -19,6 +19,17 @@ html {
 
 body {
   margin-bottom: 60px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(37, 140, 251, 0.16), transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(111, 66, 251, 0.14), transparent 45%),
+    var(--bs-body-bg);
+  background-attachment: fixed;
+}
+
+.navbar.bg-dark {
+  background-color: rgba(33, 37, 41, 0.75) !important;
+  backdrop-filter: blur(10px);
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {

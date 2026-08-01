@@ -1,34 +1,37 @@
 @model List<WeatherApp.Models.WeatherObservation>
 
-<h1>Værmålinger</h1>
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Værmålinger</h1>
+        <a asp-action="Create" class="btn btn-primary">Legg til ny måling</a>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Sted</th>
-            <th>Tidspunkt</th>
-            <th>Temperatur</th>
-            <th>Vindkast</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var maling in Model)
-        {
+    <table class="table table-striped table-hover">
+        <thead>
             <tr>
-                <td>@maling.WeatherStation?.Name</td>
-                <td>@maling.Timestamp</td>
-                <td>@maling.Temperature</td>
-                <td>@maling.WindGust</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@maling.Id">Rediger</a> |
-                    <a asp-action="Delete" asp-route-id="@maling.Id">Slett</a>
-                </td>
+                <th>Sted</th>
+                <th>Tidspunkt</th>
+                <th>Temperatur</th>
+                <th>Vindkast</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var maling in Model)
+            {
+                <tr>
+                    <td>@maling.WeatherStation?.Name</td>
+                    <td>@maling.Timestamp</td>
+                    <td>@maling.Temperature</td>
+                    <td>@maling.WindGust</td>
+                    <td class="text-end">
+                        <a asp-action="Edit" asp-route-id="@maling.Id" class="btn btn-sm btn-outline-primary">Rediger</a>
+                        <a asp-action="Delete" asp-route-id="@maling.Id" class="btn btn-sm btn-outline-danger">Slett</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<a asp-action="Create">Legg til ny måling</a>
-
-<p><a asp-controller="WeatherStations" asp-action="Index">Tilbake til værstasjoner</a></p>
+    <a asp-controller="WeatherStations" asp-action="Index" class="btn btn-secondary">Tilbake til værstasjoner</a>
+</div>

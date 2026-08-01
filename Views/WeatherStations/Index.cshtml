@@ -1,24 +1,34 @@
-@*Den forteller Razor: "denne siden forventer å motta en liste med WeatherStation-objekter*@
 @model List<WeatherApp.Models.WeatherStation>
 
-<h1>Lagrede steder</h1>   
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Lagrede steder</h1>
+        <a asp-action="Create" class="btn btn-primary">Legg til nytt sted</a>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Navn</th>
-            <th>Breddegrad</th>
-            <th>Lengdegrad</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var stasjon in Model)
-        {
+    <table class="table table-striped table-hover">
+        <thead>
             <tr>
-                <td>@stasjon.Name</td>
-                <td>@stasjon.Latitude</td>
-                <td>@stasjon.Longitude</td>
+                <th>Navn</th>
+                <th>Breddegrad</th>
+                <th>Lengdegrad</th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var stasjon in Model)
+            {
+                <tr>
+                    <td>@stasjon.Name</td>
+                    <td>@stasjon.Latitude</td>
+                    <td>@stasjon.Longitude</td>
+                    <td class="text-end">
+                        <a asp-action="Details" asp-route-id="@stasjon.Id" class="btn btn-sm btn-outline-secondary">Detaljer</a>
+                        <a asp-action="Edit" asp-route-id="@stasjon.Id" class="btn btn-sm btn-outline-primary">Rediger</a>
+                        <a asp-action="Delete" asp-route-id="@stasjon.Id" class="btn btn-sm btn-outline-danger">Slett</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

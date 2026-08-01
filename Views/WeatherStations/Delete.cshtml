@@ -1,23 +1,26 @@
 @model WeatherApp.Models.WeatherStation
 
-<h1>Slett sted</h1>
+<div class="container mt-4">
+    <h1>Slett sted</h1>
 
-<p>Er du sikker på at du vil slette dette stedet?</p>
+    <div class="alert alert-warning" style="max-width: 500px;">
+        Er du sikker på at du vil slette dette stedet?
+    </div>
 
-<dl>
-    <dt>Navn</dt>
-    <dd>@Model.Name</dd>
+    <dl class="row" style="max-width: 500px;">
+        <dt class="col-sm-4">Navn</dt>
+        <dd class="col-sm-8">@Model.Name</dd>
 
-    <dt>Breddegrad</dt>
-    <dd>@Model.Latitude</dd>
+        <dt class="col-sm-4">Breddegrad</dt>
+        <dd class="col-sm-8">@Model.Latitude</dd>
 
-    <dt>Lengdegrad</dt>
-    <dd>@Model.Longitude</dd>
-</dl>
+        <dt class="col-sm-4">Lengdegrad</dt>
+        <dd class="col-sm-8">@Model.Longitude</dd>
+    </dl>
 
-<form asp-action="Delete" method="post">
-    <input type="hidden" asp-for="Id" />
-    <button type="submit">Ja, slett</button>
-</form>
-
-<a asp-action="Index">Avbryt, tilbake til listen</a>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Ja, slett</button>
+        <a asp-action="Index" class="btn btn-secondary">Avbryt</a>
+    </form>
+</div>
