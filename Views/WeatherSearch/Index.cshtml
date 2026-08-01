@@ -1,0 +1,46 @@
+@model WeatherApp.Models.WeatherObservation
+
+<div class="container mt-4">
+    <h1>Søk værvarsel</h1>
+
+    <form asp-action="Index" method="post" class="mb-4" style="max-width: 500px;">
+        <div class="input-group">
+            <input type="text" name="cityName" class="form-control" placeholder="Skriv inn et stedsnavn, f.eks. Oslo" value="@ViewBag.CityName" />
+            <button type="submit" class="btn btn-primary">Søk</button>
+        </div>
+    </form>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger" style="max-width: 500px;">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    @if (Model != null)
+    {
+        <h2>Værvarsel for @ViewBag.CityName</h2>
+
+        <table class="table table-striped" style="max-width: 500px; table-layout: fixed;">
+            <colgroup>
+                <col style="width: 33%;" />
+                <col style="width: 33%;" />
+                <col style="width: 34%;" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="text-start">Tidspunkt</th>
+                    <th class="text-center">Temperatur</th>
+                    <th class="text-center">Vind(kast) m/s</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-start">@Model.Timestamp.ToString("dd.MM.yyyy")</td>
+                    <td class="text-center">@Model.Temperature °</td>
+                    <td class="text-center">@Model.WindGust m/s</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+</div>
