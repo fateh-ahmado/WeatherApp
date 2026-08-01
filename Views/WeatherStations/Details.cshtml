@@ -22,21 +22,26 @@
 
     @if (Model.Observations.Any())
     {
-        <table class="table table-striped">
+        <table class="table table-striped" style="table-layout: fixed;">
+            <colgroup>
+                <col style="width: 33%;" />
+                <col style="width: 33%;" />
+                <col style="width: 34%;" />
+            </colgroup>
             <thead>
                 <tr>
-                    <th>Tidspunkt</th>
-                    <th>Temperatur</th>
-                    <th>Vindkast</th>
+                    <th class="text-start">Tidspunkt</th>
+                    <th class="text-start">Temperatur</th>
+                    <th class="text-start">Vindkast</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var obs in Model.Observations)
                 {
                     <tr>
-                        <td>@obs.Timestamp</td>
-                        <td>@obs.Temperature</td>
-                        <td>@obs.WindGust</td>
+                        <td class="text-start">@obs.Timestamp.ToString("dd.MM.yyyy")</td>
+                        <td class="text-start">@obs.Temperature</td>
+                        <td class="text-start">@obs.WindGust</td>
                     </tr>
                 }
             </tbody>
@@ -47,5 +52,6 @@
         <p class="text-muted">Ingen værmålinger registrert ennå for dette stedet.</p>
     }
 
-    <a asp-action="Index" class="btn btn-secondary">Tilbake til listen</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Tilbake til hjem</a>
+    <a asp-action="Index" class="btn btn-danger">Endringer</a>
 </div>

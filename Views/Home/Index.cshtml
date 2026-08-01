@@ -4,52 +4,67 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container mt-4 d-flex justify-content-center">
-    <div class="card" style="max-width: 500px; width: 100%;">
-        <div class="card-header">
-            Mine steder
+<div class="container mt-4 d-flex flex-column align-items-center gap-4">
+
+    <div class="card border-0 shadow-sm rounded-4" style="max-width: 500px; width: 100%;">
+        <div class="card-body p-4">
+            <h5 class="card-title fw-semibold mb-3">Sjekk været</h5>
+            <form asp-action="Index" method="post" class="input-group input-group-lg rounded-3 overflow-hidden">
+                <input type="text" name="cityName" class="form-control border-0" placeholder="Skriv inn et stedsnavn, f.eks. Oslo" value="@ViewBag.CityName" />
+                <button type="submit" class="btn btn-primary px-4">Søk</button>
+            </form>
+
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger rounded-3 mt-3 mb-0">
+                    @ViewBag.ErrorMessage
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4" style="max-width: 500px; width: 100%;">
+        <div class="card-body pb-2">
+            <h6 class="text-uppercase text-body-secondary small fw-semibold mb-0">Mine steder</h6>
         </div>
         @if (Model.Count == 0)
         {
-            <div class="card-body">
-                <p class="card-text">Ingen steder er lagt til ennå.</p>
-                <a asp-controller="WeatherStations" asp-action="Create" class="btn btn-primary">Legg til nytt sted</a>
+            <div class="card-body pt-0">
+                <p class="card-text text-body-secondary mb-0">Ingen steder er lagt til ennå. Søk etter et sted ovenfor.</p>
             </div>
         }
         else
         {
-            <table class="table table-striped mb-0">
-                <thead>
-                    <tr>
-                        <th>Sted</th>
-                        <th>Tidspunkt</th>
-                        <th>Temperatur</th>
-                        <th>Vindkast</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var stasjon in Model)
-                    {
-                        var siste = stasjon.Observations.OrderByDescending(o => o.Timestamp).FirstOrDefault();
-                        <tr>
-                            <td><a asp-controller="WeatherStations" asp-action="Details" asp-route-id="@stasjon.Id">@stasjon.Name</a></td>
+            <ul class="list-group list-group-flush">
+                @foreach (var stasjon in Model)
+                {
+                    var siste = stasjon.Observations.OrderByDescending(o => o.Timestamp).FirstOrDefault();
+                    <li class="list-group-item px-4 py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a asp-controller="WeatherStations" asp-action="Details" asp-route-id="@stasjon.Id" class="fw-semibold text-decoration-none fs-5">
+                                @stasjon.Name
+                            </a>
                             @if (siste != null)
                             {
-                                <td>@siste.Timestamp.ToString("dd.MM.yyyy HH:mm")</td>
-                                <td>@siste.Temperature °</td>
-                                <td>@siste.WindGust m/s</td>
+                                var ikon = siste.Temperature >= 20 ? "bi-sun-fill text-warning"
+                                         : siste.Temperature >= 10 ? "bi-cloud-sun-fill text-secondary"
+                                         : "bi-cloud-fill text-secondary";
+                                <span class="fs-4 fw-semibold"><i class="bi @ikon me-1"></i>@siste.Temperature °</span>
                             }
-                            else
-                            {
-                                <td colspan="3">Ingen målinger</td>
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            <div class="card-body">
-                <a asp-controller="WeatherStations" asp-action="Index" class="btn btn-secondary">Se alle steder</a>
-            </div>
+                        </div>
+                        @if (siste != null)
+                        {
+                            <div class="text-body-secondary small mt-1">
+                                @siste.Timestamp.ToString("dd.MM.yyyy") &middot; Vind(kast) @siste.WindGust m/s
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-body-secondary small mt-1">Ingen målinger</div>
+                        }
+                    </li>
+                }
+            </ul>
         }
     </div>
 </div>
