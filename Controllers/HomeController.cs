@@ -17,7 +17,9 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var stasjoner = await _context.WeatherStations.ToListAsync();
+        var stasjoner = await _context.WeatherStations
+            .Include(s => s.Observations)
+            .ToListAsync();
         return View(stasjoner);
     }
 
