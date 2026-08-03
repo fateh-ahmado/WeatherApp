@@ -21,4 +21,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="WeatherApp.Tests\**" />
+    <Content Remove="WeatherApp.Tests\**" />
+    <EmbeddedResource Remove="WeatherApp.Tests\**" />
+    <None Remove="WeatherApp.Tests\**" />
+  </ItemGroup>
+
 </Project>
