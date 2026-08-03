@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WeatherApp.Data;
 using WeatherApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeatherApp.Controllers
 {
@@ -23,6 +24,7 @@ namespace WeatherApp.Controllers
             return View(malinger);
         }
         // Create 
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -30,6 +32,7 @@ namespace WeatherApp.Controllers
             return View();
         }
         //Create (POST)
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(WeatherObservation maling)
@@ -45,6 +48,7 @@ namespace WeatherApp.Controllers
             return View(maling);
         }
         //Edit (GET)
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -59,6 +63,7 @@ namespace WeatherApp.Controllers
             return View(maling);
         }
         //Edit (POST)
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, WeatherObservation maling)

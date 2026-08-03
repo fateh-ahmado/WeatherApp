@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WeatherApp.Data;
 using WeatherApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeatherApp.Controllers
 {
@@ -34,12 +35,14 @@ namespace WeatherApp.Controllers
             return View(stasjon);
         }
         // Create (GET)
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
         //Create (POST) – tar imot og lagrer skjemaet etter den er fylt ut.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(WeatherStation stasjon)
@@ -54,6 +57,7 @@ namespace WeatherApp.Controllers
             return View(stasjon);
         }
         // U (Update/Edit)
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -68,6 +72,7 @@ namespace WeatherApp.Controllers
         }
 
         //Edit (POST)
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, WeatherStation stasjon)
